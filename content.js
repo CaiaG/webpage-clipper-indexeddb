@@ -9,10 +9,22 @@ function extractTextContent(doc) {
   const bodyText = doc.body.innerText || doc.body.textContent || '';
   
   // Limit to first 100 words
-  const words = bodyText.split(/\s+/);
-  const firstHundredWords = words.slice(0, 100).join(' ');
+  // const words = bodyText.split(/\s+/);
+  // const firstHundredWords = words.slice(0, 100).join(' ');
   
-  return firstHundredWords + (words.length > 100 ? '...' : '');
+  // return firstHundredWords + (words.length > 100 ? '...' : '');
+  
+  // Calculate estimated reading time (average 200 words per minute)
+  const readingTime = Math.ceil(wordCount / 200);
+  
+  // Limit to first 100 words for content preview
+  const firstHundredWords = words.slice(0, 100).join(' ') + (words.length > 100 ? '...' : '');
+  
+  return {
+    content: firstHundredWords,
+    wordCount: wordCount,
+    readingTime: readingTime
+  };
 }
 
 // Function to clip the current page
